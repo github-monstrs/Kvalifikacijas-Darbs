@@ -7,17 +7,16 @@
   <div id="hero-wrapper"></div>
 
   <div id="hero-text">
-    <h1 id="hero-title">Lorem ipsum</h1>
-    <div id="base-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perspiciatis rerum doloribus unde quis harum maiores magnam assumenda facere neque ipsa distinctio molestias earum minima, voluptatibus expedita nihil vitae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam iure labore dolores sint excepturi magnam nihil fugiat sapiente odit minus.</div>
+    <h1 id="hero-title">Minigame Arcade</h1>
+    <div id="base-text">The perfect haven for gaming enthusiasts! From thrilling puzzles to dynamic action adventures, our platform promises endless entertainment and challenge. Engage, explore, and emerge victorious in various game genres that promise to keep you entertained for hours.</div>
+    <router-link to="/projects" tag="button" id="play-now" class="btn">Play now</router-link>
   </div>
 </template>
 
 <style scoped>
 #hero-wrapper{
-  background-image: url(../assets/ForrestBackground.jpg);
+  background-image: url(../assets/arcade-background.jpg);
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 #hero-text{
@@ -26,9 +25,31 @@
   background-color: #303030;
   top: 350px;
   width: 550px;
-  height: 250px;
-  padding: 10px;
+  height: 290px;
+  padding: 25px;
   border-radius: 0px 10px 10px 0px;
+}
+
+#play-now{
+  display: flex;
+  width: 125px;
+  height: 35px;
+  background-color: #7830c9;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 2px;
+  border: none;
+  margin-top: 10px;
+  text-align: center;
+  justify-content: center;
+  transition: 0ms;
+}
+
+#play-now:hover{
+  background-color: transparent;
+  border: solid 3px;
+  border-color: #7830c9;
+  padding: 3px;
 }
 
 #hero-title{

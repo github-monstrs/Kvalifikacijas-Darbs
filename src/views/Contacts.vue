@@ -83,7 +83,7 @@ const submitForm = () => {
 #contact-me{
   font-size: 56px;
   font-weight: bold;
-  color: #41b883;
+  color: #7830c9;
 }
 
 #background{
@@ -111,8 +111,8 @@ input[type="text"], input[type="email"], textarea {
 body { display: block }
 
 button[type="submit"] { 
-  background-color: rgb(65, 184, 131);
-  color: #303030;
+  background-color: #7830c9;
+  color: #ffffff;
   font-size: 0.8rem;
   border: none;
   border-radius: 4px;
@@ -125,7 +125,7 @@ button[type="submit"]:hover {
 }
 
 button[type="submit"]:active {
-  background-color: rgb(35, 92, 65);
+  background-color: #7830c9;
   color: white;
 }
 .form-fields input{

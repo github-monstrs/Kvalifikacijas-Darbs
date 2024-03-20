@@ -5,7 +5,7 @@ import HeaderBar from '@/components/HeaderBar.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="40" height="40" />
+    <img alt="Vue logo" class="logo" src="./assets/logo.png" width="40" height="40" />
     <HeaderBar />
   </header>
 
