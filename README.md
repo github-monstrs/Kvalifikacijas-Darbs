@@ -2,6 +2,10 @@
 
 4.kursa kvalifikācijas darbs RVT.
 
+## Project overview
+
+Project overview in stages [here](https://github.com/github-monstrs/Kvalifikacijas-Darbs/tree/main/project-overview)
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
