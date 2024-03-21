@@ -28,6 +28,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios'; // Ensure Axios is imported
 
 const formData = ref({
   name: '',
@@ -35,37 +36,17 @@ const formData = ref({
   message: '',
 });
 
-const submitForm = () => {
-  formData.name = formData.name;
-  formData.email = formData.email;
-  formData.message = formData.message;
+const submitForm = async () => {
+  try {
+    const response = await axios.post('http://127.0.0.1:8000/api/send-email', formData.value);
+    alert('Message sent successfully!');
+    formData.value = { name: '', email: '', message: '' };
+  } catch (error) {
+    console.error('There was an error sending the message', error);
+    alert('Failed to send the message.');
+  }
+}
 
-  const data = {
-    name: formData.value.name,
-    email: formData.value.email,
-    message: formData.value.message,
-  };
-
-  fetch('http://localhost:3000/send-email', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Failed to send the email');
-    })
-    .then((data) => {
-      console.log(data.message);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
 </script>
 
 
