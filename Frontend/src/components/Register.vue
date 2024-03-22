@@ -1,10 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 
 const formData = ref({
   email: '',
-  passowrd: '',
+  passoword: '',
 });
+
+const instance = getCurrentInstance();
 
 const submitForm = () => {
   formData.email = formData.email;
@@ -35,11 +37,19 @@ const submitForm = () => {
       console.error(error);
     });
 };
+
+const unmountSelf = () => {
+  const appElement = instance.vnode.el.parentElement; // Get the parent of the component's root element
+  if (appElement) {
+    appElement.removeChild(instance.vnode.el); // Remove the component's root element from its parent
+  }
+};
+
 </script>
 
 <template>
-  <div id="background-wrapper">
-    <div id="login-bg">
+  <div id="background-wrapper" @click="unmountSelf()">
+    <div id="login-bg" @click.stop.prevent>
       <div id="top">
         <h4 id="sign-in">Register</h4>
       </div>
@@ -76,7 +86,7 @@ a{
 }
 
 a:hover{
-  color: #41b883;
+  color: #7830c9;
   text-decoration: underline;
   cursor: pointer;
   transition: none;

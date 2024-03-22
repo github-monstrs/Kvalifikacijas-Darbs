@@ -69,7 +69,7 @@ const submitForm = async () => {
 
 #background{
   background-color: #303030;
-  height: 800px;
+  height: 100%;
 }
 .form-fields {
   margin-bottom: 0.5rem;

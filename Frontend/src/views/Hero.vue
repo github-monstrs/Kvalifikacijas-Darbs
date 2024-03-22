@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
   
   <div id="hero-wrapper"></div>
@@ -12,6 +8,10 @@
     <router-link to="/projects" tag="button" id="play-now" class="btn">Play now</router-link>
   </div>
 </template>
+
+<script setup>
+
+</script>
 
 <style scoped>
 #hero-wrapper{
@@ -33,23 +33,24 @@
 #play-now{
   display: flex;
   width: 125px;
-  height: 35px;
+  height: 40px;
   background-color: #7830c9;
   color: #ffffff;
   padding: 5px;
   border-radius: 2px;
   border: none;
-  margin-top: 10px;
-  text-align: center;
+  align-items: center;
   justify-content: center;
   transition: 0ms;
 }
 
 #play-now:hover{
+  display: flex;
   background-color: transparent;
   border: solid 3px;
   border-color: #7830c9;
-  padding: 3px;
+  align-items: center;
+  justify-content: center;
 }
 
 #hero-title{
@@ -62,5 +63,6 @@
   font-size: 17px;
   line-height: 1.5;
   width: 500px;
+  margin-bottom: 15px;
 }
 </style>
