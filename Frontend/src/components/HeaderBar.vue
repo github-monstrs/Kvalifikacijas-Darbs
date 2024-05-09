@@ -1,6 +1,6 @@
 <script setup>
 import logIn from '@/components/LogIn.vue';
-import Register from '@/components/Register.vue';
+import LogIn from '@/components/LogIn.vue';
 import { ref, onMounted, createApp } from 'vue';
 
 function createLogInPopup(){
@@ -12,7 +12,7 @@ function createLogInPopup(){
 
     mainEl.appendChild(popupRoot);
 
-    const logInPopup = createApp(Register);
+    const logInPopup = createApp(LogIn);
     logInPopup.mount(popupRoot);
 }
 </script>
@@ -23,7 +23,7 @@ function createLogInPopup(){
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/projects">Projects</router-link></li>
       <li><router-link to="/contacts">Contacts</router-link></li>
-      <li><img id="logIn" src="../assets/picture-placeholder.png" @click="createLogInPopup()" width="40" height="40" ></li>
+      <li><img id="logIn" src="../assets/picture-placeholder.png" alt="profile picture placeholder image" @click="createLogInPopup()" width="40" height="40" ></li>
     </ul>
   </nav>
 </template>
