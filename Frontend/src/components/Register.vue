@@ -1,5 +1,6 @@
 <script setup>
-import { ref, getCurrentInstance } from 'vue';
+import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
+import LogIn from '@/components/LogIn.vue';
 
 const formData = ref({
   email: '',
@@ -45,6 +46,21 @@ const unmountSelf = () => {
   }
 };
 
+function createLogInPopup(){
+    unmountSelf();
+
+    var mainEl = document.getElementById('mainEl');
+    var popupRoot = document.createElement('div');
+
+    popupRoot.style.position = 'absolute';
+    popupRoot.style.top = '0px';  
+
+    mainEl.appendChild(popupRoot);
+
+    const logInPopup = createApp(LogIn);
+    logInPopup.mount(popupRoot);
+}
+
 </script>
 
 <template>
@@ -74,6 +90,9 @@ const unmountSelf = () => {
           <button type="submit">Register</button>
         </form>
       </div>
+      <div id="bottom">
+          <a id="register" @click="createLogInPopup()">Already a member? Sign In.</a>
+        </div>
     </div>
   </div>
 </template>
@@ -94,12 +113,19 @@ a:hover{
   background-color: transparent;
 }
 
+#bottom{
+  display: flex;
+  width: inherit;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 #background-wrapper{
   position: absolute;
-  top: 0px;
+  top: -100px;
   width: 100vw;
-  height: 100vh;
-  background-color: rgba(35, 35, 35, 0.75);
+  height: calc(100vh + 100px);
+  background-color: rgba(35, 35, 35, 0.9);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -126,7 +152,7 @@ a:hover{
 
 #bottom{
   display: flex;
-  width: inherit;
+  width: 325px;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -140,9 +166,10 @@ a:hover{
 #form-wrapper{
   display: flex;
   flex-direction: column;
-  height: 50%;
   justify-content: space-around;
+  margin-bottom: 20px;
 }
+
 .form-fields {
   margin-bottom: 0.5rem;
 }
@@ -163,7 +190,7 @@ input[type="password"], input[type="email"] {
 }
 
 button[type="submit"] { 
-  background-color: rgb(65, 184, 131);
+  background-color: #7830c9;
   color: #303030;
   font-size: 0.8rem;
   border: none;
@@ -171,6 +198,16 @@ button[type="submit"] {
   padding: 10px 35px;
   font-weight: 600;
 }
+
+button[type="submit"]:hover{
+  background-color: transparent;
+  border: solid 3px;
+  border-color: #7830c9;
+  color: #303030;
+  padding: 7px 32px;
+  cursor: pointer;
+}
+
 .form-fields input{
   width: 325px;
 }

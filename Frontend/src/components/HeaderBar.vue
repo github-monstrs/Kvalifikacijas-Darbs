@@ -1,5 +1,4 @@
 <script setup>
-import logIn from '@/components/LogIn.vue';
 import LogIn from '@/components/LogIn.vue';
 import { ref, onMounted, createApp } from 'vue';
 

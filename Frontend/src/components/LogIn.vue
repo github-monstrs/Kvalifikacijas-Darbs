@@ -1,5 +1,6 @@
 <script setup>
-import { ref, getCurrentInstance } from 'vue';
+import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
+import Register from '@/components/Register.vue';
 
 const formData = ref({
   email: '',
@@ -45,6 +46,21 @@ const unmountSelf = () => {
   }
 };
 
+function createRegisterPopup(){
+    unmountSelf();
+
+    var mainEl = document.getElementById('mainEl');
+    var popupRoot = document.createElement('div');
+
+    popupRoot.style.position = 'absolute';
+    popupRoot.style.top = '0px';  
+
+    mainEl.appendChild(popupRoot);
+
+    const RegisterPopup = createApp(Register);
+    RegisterPopup.mount(popupRoot);
+}
+
 </script>
 
 <template>
@@ -69,7 +85,7 @@ const unmountSelf = () => {
           <button type="submit">Login</button>
         </form>
         <div id="bottom">
-          <a id="register">Register</a>
+          <a id="register" @click="createRegisterPopup()">Register</a>
           <a id="forgot-pwd">Forgot password?</a>
         </div>
       </div>
@@ -85,7 +101,7 @@ a{
 }
 
 a:hover{
-  color: #41b883;
+  color: #7830c9;
   text-decoration: underline;
   cursor: pointer;
   transition: none;
@@ -95,10 +111,10 @@ a:hover{
 
 #background-wrapper{
   position: absolute;
-  top: 0px;
+  top: -100px;
   width: 100vw;
-  height: 100vh;
-  background-color: rgba(35, 35, 35, 0.75);
+  height: calc(100vh + 100px);
+  background-color: rgba(35, 35, 35, 0.9);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -142,6 +158,7 @@ a:hover{
   height: 50%;
   justify-content: space-around;
 }
+
 .form-fields {
   margin-bottom: 0.5rem;
 }
@@ -162,14 +179,24 @@ input[type="password"], input[type="email"] {
 }
 
 button[type="submit"] { 
-  background-color: rgb(65, 184, 131);
-  color: #303030;
+  background-color: #7830c9;
+  color: #fff;
   font-size: 0.8rem;
   border: none;
   border-radius: 4px;
   padding: 10px 35px;
   font-weight: 600;
 }
+
+button[type="submit"]:hover{
+  background-color: transparent;
+  border: solid 3px;
+  border-color: #7830c9;
+  color: #303030;
+  padding: 7px 32px;
+  cursor: pointer;
+}
+
 .form-fields input{
   width: 325px;
 }
