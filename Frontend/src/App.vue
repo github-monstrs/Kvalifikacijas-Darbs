@@ -28,11 +28,10 @@ header {
 }
 
 main{
+  position: relative;
   width: 100%;
   height: 100%;
-  top: 50px;
   left: 0px;
-  overflow-y: hidden !important;
 }
 
 header img {

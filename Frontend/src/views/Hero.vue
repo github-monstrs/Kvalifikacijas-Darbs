@@ -1,12 +1,13 @@
 <template>
   
-  <div id="hero-wrapper"></div>
-
-  <div id="hero-text">
-    <h1 id="hero-title">Minigame Arcade</h1>
-    <div id="base-text">The perfect haven for gaming enthusiasts! From thrilling puzzles to dynamic action adventures, our platform promises endless entertainment and challenge. Engage, explore, and emerge victorious in various game genres that promise to keep you entertained for hours.</div>
-    <router-link to="/projects" tag="button" id="play-now" class="btn">Play now</router-link>
+  <div id="hero-wrapper">
+    <div id="hero-text">
+      <h1 id="hero-title">Minigame Arcade</h1>
+      <div id="base-text">The perfect haven for gaming enthusiasts! From thrilling puzzles to dynamic action adventures, our platform promises endless entertainment and challenge. Engage, explore, and emerge victorious in various game genres that promise to keep you entertained for hours.</div>
+      <router-link to="/projects" tag="button" id="play-now" class="btn">Play now</router-link>
+    </div>
   </div>
+
 </template>
 
 <script setup>
@@ -20,10 +21,10 @@
 }
 
 #hero-text{
-  position: absolute;
+  position: relative;
   color: white;
-  background-color: #303030;
-  top: 350px;
+  background-color: rgba(48, 48, 48, 1);
+  top: 50%;
   width: 550px;
   height: 290px;
   padding: 25px;
@@ -66,15 +67,18 @@
   margin-bottom: 15px;
 }
 
-@media (max-width: 764px) {
+@media (max-width: 600px) {
   #hero-text{
     width: 100%;
-    height: 450px;
+    background-color: rgba(48, 48, 48, 1);
+    height: 50vh;
+    top: 30%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
+    border-radius: 0;
   }
 }
 </style>
