@@ -5,7 +5,7 @@ import HeaderBar from '@/components/HeaderBar.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.png" width="40" height="40" />
+    <a id="logo" href="/"><img alt="Vue logo" class="logo" src="./assets/logo.png" width="40" height="40" /></a>
     <HeaderBar />
   </header>
 
@@ -39,19 +39,27 @@ header img {
   left: 0px;
 }
 
+#logo:hover{
+  background-color: transparent;
+  padding: 0px;
+  border-radius: 0px;
+}
+
 .logo {
   display: block;
   margin: 0 auto 2rem;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-  }
+header {
+  display: flex;
+  place-items: center;
+}
 
-  .logo {
+.logo {
     margin: 0 15px;
   }
+
+@media (min-width: 1024px) {
+  
 }
 </style>

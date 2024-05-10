@@ -1,5 +1,9 @@
 @import './base.css';
 
+body {
+  display: flex;
+}
+
 #app {
   margin: 0 auto;
   overflow: hidden;
@@ -23,7 +27,5 @@ a,
 }
 
 @media (min-width: 1024px) {
-  body {
-    display: flex;
-  }
+  
 }

@@ -65,4 +65,16 @@
   width: 500px;
   margin-bottom: 15px;
 }
+
+@media (max-width: 764px) {
+  #hero-text{
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
 </style>

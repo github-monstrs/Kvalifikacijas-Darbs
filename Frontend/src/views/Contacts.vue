@@ -67,6 +67,10 @@ const submitForm = async () => {
   color: #7830c9;
 }
 
+#message{
+  resize: none;
+}
+
 #background{
   background-color: #303030;
   height: 100%;
