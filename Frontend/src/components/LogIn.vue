@@ -1,42 +1,32 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 import Register from '@/components/Register.vue';
 
+
+const router = useRouter();
 const formData = ref({
   email: '',
-  passowrd: '',
+  password: '',
 });
 
 const instance = getCurrentInstance();
 
-const submitForm = () => {
-  formData.email = formData.email;
-  formData.password = formData.password;
-
-  const data = {
-    email: formData.value.email,
-    password: formData.value.password,
-  };
-
-  fetch('http://localhost:3000/auth-login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Failed to authenticate');
-    })
-    .then((data) => {
-      console.log(data.message);
-    })
-    .catch((error) => {
-      console.error(error);
+const handleLogIn = async () => {
+  try {
+    const response = await axios.post('/login', {
+      email: formData.value.email,
+      password: formData.value.password
     });
+    
+    if (response.status === 200) {
+
+      window.location.reload();
+    }
+  } catch (error) {
+    window.location.reload();
+  }
 };
 
 const unmountSelf = () => {
@@ -82,7 +72,7 @@ function createRegisterPopup(){
             <input v-model="formData.password" type="password" id="password" name="password" required>
           </div>
 
-          <button type="submit">Login</button>
+          <button type="submit" @click="handleLogIn()">Login</button>
         </form>
         <div id="bottom">
           <a id="register" @click="createRegisterPopup()">Register</a>

@@ -1,42 +1,36 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 import LogIn from '@/components/LogIn.vue';
 
+
+const router = useRouter();
 const formData = ref({
+  username: '',
   email: '',
-  passoword: '',
+  password: '',
+  password_confirm: ''
 });
 
 const instance = getCurrentInstance();
 
-const submitForm = () => {
-  formData.email = formData.email;
-  formData.password = formData.password;
-
-  const data = {
-    email: formData.value.email,
-    password: formData.value.password,
-  };
-
-  fetch('http://localhost:3000/auth-login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Failed to authenticate');
-    })
-    .then((data) => {
-      console.log(data.message);
-    })
-    .catch((error) => {
-      console.error(error);
+const handleRegister = async () => {
+  try {
+    const response = await axios.post('/register', {
+      username: formData.value.username,
+      email: formData.value.email,
+      password: formData.value.password,
+      password_confirm: formData.value.password_confirm
     });
+    
+    if (response.status === 200) {
+
+      window.location.reload();
+    }
+  } catch (error) {
+    window.location.reload();
+  }
 };
 
 const unmountSelf = () => {
@@ -70,7 +64,11 @@ function createLogInPopup(){
         <h4 id="sign-in">Register</h4>
       </div>
       <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8">
+        <form accept-charset="UTF-8" @submit="handleRegister()">
+          <div class="form-fields">
+            <label for="username">Username</label>
+            <input v-model="formData.username" type="text" id="username" name="username" required>
+          </div>
 
           <div class="form-fields">
             <label for="email">Email</label>
@@ -84,10 +82,10 @@ function createLogInPopup(){
 
           <div class="form-fields">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+            <input v-model="formData.password_confirm" type="password" id="confirm-password" name="confirm-password" required>
           </div>
 
-          <button type="submit">Register</button>
+          <button type="submit" @click="handleRegister()">Register</button>
         </form>
       </div>
       <div id="bottom">
@@ -145,7 +143,7 @@ a:hover{
 #top{
   display: flex;
   width: inherit;
-  height: 40%;
+  height: 30%;
   justify-content: center;
   align-items: center;
 }
@@ -182,7 +180,7 @@ label {
   color: #303030;
 }
 
-input[type="password"], input[type="email"] {
+input[type="password"], input[type="email"], input[type="text"] {
   border: 1px solid #ccc;
   font-size: 1rem;
   padding: 6px 10px;
