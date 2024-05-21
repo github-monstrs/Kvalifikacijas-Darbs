@@ -7,6 +7,11 @@ onMounted(async () => {
   const data = await axios.get('/api/user');
   console.log(data);
 });
+
+const getToken = async () => {
+  await axios.get("/sanctum/csrf-cookie");
+}
+
 </script>
 
 <template>

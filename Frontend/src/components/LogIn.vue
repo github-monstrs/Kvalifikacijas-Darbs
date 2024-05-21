@@ -13,19 +13,23 @@ const formData = ref({
 
 const instance = getCurrentInstance();
 
+const getToken = async () => {
+  await axios.get("/sanctum/csrf-cookie");
+}
+
 const handleLogIn = async () => {
   try {
+    await getToken();
     const response = await axios.post('/login', {
       email: formData.value.email,
       password: formData.value.password
     });
     
     if (response.status === 200) {
-
-      window.location.reload();
+      window.location = "/dashboard";
     }
   } catch (error) {
-    window.location.reload();
+    window.location = "/dashboard";
   }
 };
 
