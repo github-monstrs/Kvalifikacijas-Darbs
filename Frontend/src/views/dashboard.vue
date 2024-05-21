@@ -1,27 +1,27 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios';
+import { useAuthStore } from '../stores/auth';
 
-const user = ref();
+const authStore = useAuthStore();
+
 onMounted(async () => {
-
-    await getToken();
-
-    const data = await axios.get('/api/user');
-    user.value = data.data;
+  await authStore.getUser();
 });
 
-const getToken = async () => {
-  await axios.get("/sanctum/csrf-cookie");
-}
 
 </script>
 
 
 <template>
     <div id="main">
-        <h1>{{ user ?.name }}</h1>
-        <p>{{ user ?.email }}</p>
+        <div v-if="authStore.user">
+            <h1>{{ authStore.user.name }}</h1>
+            <p>{{ authStore.user.email }}</p>
+        </div>
+        <div v-else>
+            <h1> LOG IN  </h1>
+        </div>
     </div>
 </template>
 
