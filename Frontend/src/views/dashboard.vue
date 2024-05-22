@@ -69,9 +69,6 @@ onMounted(async () => {
             </div>
         </div>
     </div>
-    <div v-else id="prompt">
-        <h1> LOG IN  </h1>
-    </div>
 </template>
 
 

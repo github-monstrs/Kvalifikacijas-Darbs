@@ -1,11 +1,10 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
-import LogIn from '@/components/LogIn.vue';
+import { useAuthStore } from '@/stores/auth';
 
 
-const router = useRouter();
+const authStore = useAuthStore();
+
 const formData = ref({
   username: '',
   email: '',
@@ -15,56 +14,17 @@ const formData = ref({
 
 const instance = getCurrentInstance();
 
-const handleRegister = async () => {
-  try {
-    const response = await axios.post('/register', {
-      username: formData.value.username,
-      email: formData.value.email,
-      password: formData.value.password,
-      password_confirm: formData.value.password_confirm
-    });
-    
-    if (response.status === 200) {
-
-      window.location.reload();
-    }
-  } catch (error) {
-    window.location.reload();
-  }
-};
-
-const unmountSelf = () => {
-  const appElement = instance.vnode.el.parentElement; // Get the parent of the component's root element
-  if (appElement) {
-    appElement.removeChild(instance.vnode.el); // Remove the component's root element from its parent
-  }
-};
-
-function createLogInPopup(){
-    unmountSelf();
-
-    var mainEl = document.getElementById('mainEl');
-    var popupRoot = document.createElement('div');
-
-    popupRoot.style.position = 'absolute';
-    popupRoot.style.top = '0px';  
-
-    mainEl.appendChild(popupRoot);
-
-    const logInPopup = createApp(LogIn);
-    logInPopup.mount(popupRoot);
-}
 
 </script>
 
 <template>
-  <div id="background-wrapper" @click="unmountSelf()">
-    <div id="login-bg" @click.stop.prevent>
+  <div id="background-wrapper">
+    <div id="login-bg">
       <div id="top">
         <h4 id="sign-in">Register</h4>
       </div>
       <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8" @submit="handleRegister()">
+        <form accept-charset="UTF-8" @submit.prevent="authStore.handleRegister(formData)">
           <div class="form-fields">
             <label for="username">Username</label>
             <input v-model="formData.username" type="text" id="username" name="username" required>
@@ -85,11 +45,11 @@ function createLogInPopup(){
             <input v-model="formData.password_confirm" type="password" id="confirm-password" name="confirm-password" required>
           </div>
 
-          <button type="submit" @click="handleRegister()">Register</button>
+          <button type="submit" @click="authStore.handleRegister(formData)">Register</button>
         </form>
       </div>
       <div id="bottom">
-          <a id="register" @click="createLogInPopup()">Already a member? Sign In.</a>
+          <router-link to="/login" id="register">Already a member? Sign In.</router-link>
         </div>
     </div>
   </div>
@@ -119,10 +79,8 @@ a:hover{
 }
 
 #background-wrapper{
-  position: absolute;
-  top: -100px;
   width: 100vw;
-  height: calc(100vh + 100px);
+  height: 100vh;
   background-color: rgba(35, 35, 35, 0.9);
   overflow: hidden;
   display: flex;

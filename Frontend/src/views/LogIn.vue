@@ -1,70 +1,25 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
-import Register from '@/components/Register.vue';
+import { useAuthStore } from '@/stores/auth';
 
 
-const router = useRouter();
+const authStore = useAuthStore();
+
 const formData = ref({
   email: '',
   password: '',
 });
 
-const instance = getCurrentInstance();
-
-const getToken = async () => {
-  await axios.get("/sanctum/csrf-cookie");
-}
-
-const handleLogIn = async () => {
-  try {
-    await getToken();
-    const response = await axios.post('/login', {
-      email: formData.value.email,
-      password: formData.value.password
-    });
-    
-    if (response.status === 200) {
-      window.location = "/dashboard";
-    }
-  } catch (error) {
-    window.location = "/dashboard";
-  }
-};
-
-const unmountSelf = () => {
-  const appElement = instance.vnode.el.parentElement; // Get the parent of the component's root element
-  if (appElement) {
-    appElement.removeChild(instance.vnode.el); // Remove the component's root element from its parent
-  }
-};
-
-function createRegisterPopup(){
-    unmountSelf();
-
-    var mainEl = document.getElementById('mainEl');
-    var popupRoot = document.createElement('div');
-
-    popupRoot.style.position = 'absolute';
-    popupRoot.style.top = '0px';  
-
-    mainEl.appendChild(popupRoot);
-
-    const RegisterPopup = createApp(Register);
-    RegisterPopup.mount(popupRoot);
-}
-
 </script>
 
 <template>
-  <div id="background-wrapper" @click="unmountSelf()">
-    <div id="login-bg" @click.stop.prevent>
+  <div id="background-wrapper" >
+    <div id="login-bg">
       <div id="top">
         <h4 id="sign-in">Sign In</h4>
       </div>
       <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8">
+        <form accept-charset="UTF-8" @submit.prevent="authStore.handleLogIn(formData)">
 
           <div class="form-fields">
             <label for="email">Email</label>
@@ -76,10 +31,10 @@ function createRegisterPopup(){
             <input v-model="formData.password" type="password" id="password" name="password" required>
           </div>
 
-          <button type="submit" @click="handleLogIn()">Login</button>
+          <button type="submit" @click="authStore.handleLogIn(formData)">Login</button>
         </form>
         <div id="bottom">
-          <a id="register" @click="createRegisterPopup()">Register</a>
+          <router-link to="/register" id="register" >Register</router-link>
           <a id="forgot-pwd">Forgot password?</a>
         </div>
       </div>
@@ -104,10 +59,8 @@ a:hover{
 }
 
 #background-wrapper{
-  position: absolute;
-  top: -100px;
   width: 100vw;
-  height: calc(100vh + 100px);
+  height: 100vh;
   background-color: rgba(35, 35, 35, 0.9);
   overflow: hidden;
   display: flex;

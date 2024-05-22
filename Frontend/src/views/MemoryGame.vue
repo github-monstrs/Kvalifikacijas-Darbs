@@ -2,8 +2,8 @@
 import gameItem from '@/components/Game Components/gameItem.vue';
 import gameEndScreen from '@/components/Game Components/gameEndScreen.vue';
 import gameRows from '@/components/Game Components/gameRows.vue';
-import logIn from '@/components/LogIn.vue';
-import Register from '@/components/Register.vue';
+import logIn from '@/views/LogIn.vue';
+import Register from '@/views/Register.vue';
 import { ref, onMounted, createApp } from 'vue';
 
 //-------Global Vars-------

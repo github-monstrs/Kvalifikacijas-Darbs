@@ -4,6 +4,8 @@ import Contacts from "@/views/Contacts.vue";
 import Projects from "@/views/Projects.vue";
 import MemoryGame from "@/views/MemoryGame.vue";
 import Dashboard from "@/views/dashboard.vue";
+import Login from "@/views/LogIn.vue"
+import Register from "@/views/Register.vue"
 
 const routes = [
   {
@@ -31,6 +33,16 @@ const routes = [
     name: "dashboard",
     component: Dashboard,
 
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register,
   }
 ];
 
