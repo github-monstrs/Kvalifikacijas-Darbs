@@ -1,4 +1,15 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth';
+import axios from 'axios';
+
+
+const authStore = useAuthStore();
+
+onMounted(async () => {
+  await authStore.getUser();
+});
+
 defineProps({
 
   score: {
@@ -6,17 +17,33 @@ defineProps({
     required: true
   },
 
-  resetFunction: {
-    type: Function,
-    required: false
+  gameID: {
+    type: Number,
+    required: true
   },
-  
-  saveScoreFunction: {
+
+  resetFunction: {
     type: Function,
     required: false
   }
 
 });
+
+const saveScore = async (score, gameID, authStore, resetFunction) => {
+  try {
+    const response = await axios.post('/api/save-score', {
+      score: score,
+      gameID: gameID,
+      userID: authStore.user.id
+    });
+    console.log(response.data.message);
+    resetFunction();
+
+  } catch (error) {
+    console.error('Error saving score:', error);
+  }
+};
+
 </script>
 
 
@@ -26,7 +53,12 @@ defineProps({
     <h3 id="score-text">Your Score: {{ score }}</h3>
     <div id="button-wrapper">
       <button @click="resetFunction()">Reset</button>
-      <button @click="saveScoreFunction()">Save Score</button>
+      <template v-if="authStore.user">
+        <button @click="saveScore(score, gameID, authStore, resetFunction)">Save Score</button>
+      </template>
+      <template v-else>
+        <button @click="someOtherFunction()">Save Score</button>
+      </template>
     </div>
   </div>
 </template>

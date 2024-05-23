@@ -5,7 +5,11 @@ import gameRows from '@/components/Game Components/gameRows.vue';
 import logIn from '@/views/LogIn.vue';
 import Register from '@/views/Register.vue';
 import { ref, onMounted, createApp } from 'vue';
+import { useAuthStore } from '../stores/auth';
 
+const authStore = useAuthStore();
+
+const gameID = 1;
 
 var lastGameItemClicked = 0;
 var nrOfItems = 4;
@@ -80,7 +84,7 @@ function mainGameFunc(itemID){
         var gridParent = document.getElementById('game-wrapper');
 
 
-        gameEndScreenRef.value = createApp(gameEndScreen, { score: score, resetFunction: unmountGameEndScreen, saveScoreFunction: createLogInPopup });
+        gameEndScreenRef.value = createApp(gameEndScreen, { score: score, gameID: gameID, resetFunction: unmountGameEndScreen });
         gameEndScreenRef.value.mount(gridParent);
 
         resetState();
@@ -164,7 +168,9 @@ function generateGame(){
     }
 }
 
-onMounted(() => {
+onMounted(async () => {
+    await authStore.getUser();
+    
     loadGameRows();
     resetState();
     generateGame();
