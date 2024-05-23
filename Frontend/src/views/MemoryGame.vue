@@ -6,14 +6,12 @@ import logIn from '@/views/LogIn.vue';
 import Register from '@/views/Register.vue';
 import { ref, onMounted, createApp } from 'vue';
 
-//-------Global Vars-------
 
 var lastGameItemClicked = 0;
 var nrOfItems = 4;
 var score = 0;
 const gameEndScreenRef = ref(null);
 
-//-------------------------
 
 function generateItemLocations(nrOfItems) {
     var itemLocations = [];
