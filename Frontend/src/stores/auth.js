@@ -4,6 +4,7 @@ import axios from "axios";
 export const useAuthStore = defineStore("auth", {
     state: () => ({
         authUser: null,
+        csrfToken: null,
     }),
     getters: {
         user: (state) => state.authUser,
@@ -56,6 +57,19 @@ export const useAuthStore = defineStore("auth", {
             await axios.post('/logout');
             this.authUser = null;
         },
-          
+        async handleEmail(data) {
+            try {
+                await this.getToken();
+                await axios.post('api/send-email', {
+                    name: data.name,
+                    email: data.email,
+                    message: data.message,
+                });
+
+            }
+            catch (error) {
+                console.error('There was an error sending the message', error);
+            }
+        },
     }
 });

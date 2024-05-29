@@ -1,10 +1,43 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useAuthStore } from '@/stores/auth'; // Adjust the path to your store as necessary
+
+const authStore = useAuthStore();
+
+onMounted(async () => {
+  await authStore.getUser();
+});
+
+const formData = ref({
+  name: '',
+  email: '',
+  message: '',
+});
+
+async function submitForm() {
+  try {
+    await authStore.handleEmail(formData.value);
+    clearFormData();
+  } catch (error) {
+  }
+}
+
+function clearFormData() {
+  formData.value.name = '';
+  formData.value.email = '';
+  formData.value.message = '';
+}
+
+</script>
+
 <template>
   <div id="background">
     <div id="top" class="wrapper">
       <h1 id="contact-me">Contact me</h1>
     </div>
     <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8" @submit.prevent="submitForm">
+        <form accept-charset="UTF-8" @submit.prevent="submitForm();">
           <div class="form-fields">
             <label for="name">Name</label>
             <input v-model="formData.name" type="text" id="name" name="name" required>
@@ -25,30 +58,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import axios from 'axios'; // Ensure Axios is imported
-
-const formData = ref({
-  name: '',
-  email: '',
-  message: '',
-});
-
-const submitForm = async () => {
-  try {
-    const response = await axios.post('http://127.0.0.1:8000/api/send-email', formData.value);
-    alert('Message sent successfully!');
-    formData.value = { name: '', email: '', message: '' };
-  } catch (error) {
-    console.error('There was an error sending the message', error);
-    alert('Failed to send the message.');
-  }
-}
-
-</script>
-
 
 <style scoped>
 .wrapper{

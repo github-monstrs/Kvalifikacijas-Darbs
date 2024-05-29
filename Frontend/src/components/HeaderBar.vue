@@ -28,6 +28,7 @@ window.onclick = function(event) {
     <ul>
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/projects">Projects</router-link></li>
+      <li><router-link to="/leaderboard">Leaderboard</router-link></li>
       <li><router-link to="/contacts">Contacts</router-link></li>
       <template v-if="!authStore.user">
         <li><router-link to="/login">Login</router-link></li>
@@ -105,7 +106,7 @@ nav {
 
 ul {
   height: 100%;
-  width: 300px;
+  width: 375px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
