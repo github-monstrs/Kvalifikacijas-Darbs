@@ -15,19 +15,35 @@ const formData = ref({
   message: '',
 });
 
+const rating = ref({
+  stars: 0,
+});
+
 async function submitForm() {
   try {
     await authStore.handleEmail(formData.value);
     clearFormData();
   } catch (error) {
   }
-}
+};
 
 function clearFormData() {
   formData.value.name = '';
   formData.value.email = '';
   formData.value.message = '';
-}
+};
+
+async function submitRating() {
+  try {
+    await authStore.handleRating(rating.value);
+    resetRating();
+  } catch (error) {
+  }
+};
+
+function resetRating() {
+  rating.value.stars = 0;
+};
 
 </script>
 
@@ -37,24 +53,56 @@ function clearFormData() {
       <h1 id="contact-me">Contact me</h1>
     </div>
     <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8" @submit.prevent="submitForm();">
-          <div class="form-fields">
-            <label for="name">Name</label>
-            <input v-model="formData.name" type="text" id="name" name="name" required>
-          </div>
-
-          <div class="form-fields">
-            <label for="email">Email</label>
-            <input v-model="formData.email" type="email" id="email" name="email" required>
-          </div>
-
-          <div class="form-fields">
-            <label for="message">Message</label>
-            <textarea v-model="formData.message " id="message" name="message" required></textarea>
-          </div>
-
-          <button type="submit">Send message</button>
-        </form>
+      <form accept-charset="UTF-8" @submit.prevent="submitForm();">
+        <div class="form-fields">
+          <label for="name">Name</label>
+          <input v-model="formData.name" type="text" id="name" name="name" required>
+        </div>
+        <div class="form-fields">
+          <label for="email">Email</label>
+          <input v-model="formData.email" type="email" id="email" name="email" required>
+        </div>
+        <div class="form-fields">
+          <label for="message">Message</label>
+          <textarea v-model="formData.message " id="message" name="message" required></textarea>
+        </div>
+        <button type="submit">Send message</button>
+      </form>
+    </div>
+    <div id="bottom" class="wrapper">
+      <!-- Star rating design from: https://codepen.io/neilpomerleau/pen/wzxzQM -->
+      <form class="rating">
+        <label>
+          <input v-model="rating.stars" type="radio" name="stars" value="1" @change="submitRating()"/>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input v-model="rating.stars" type="radio" name="stars" value="2" @change="submitRating()"/>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input v-model="rating.stars" type="radio" name="stars" value="3" @change="submitRating()"/>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>   
+        </label>
+        <label>
+          <input v-model="rating.stars" type="radio" name="stars" value="4" @change="submitRating()"/>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input v-model="rating.stars" type="radio" name="stars" value="5" @change="submitRating()"/>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+      </form>
     </div>
   </div>
 </template>
@@ -68,6 +116,10 @@ function clearFormData() {
 
 #top{ 
   height: 160px;
+}
+
+#form-wrapper{
+  margin-bottom: 75px;
 }
 
 #contact-me{
@@ -128,5 +180,73 @@ button[type="submit"]:active {
 .form-fields textarea{
   width: 400px;
   min-height: 150px;
+}
+
+
+/* Star rating design from: https://codepen.io/neilpomerleau/pen/wzxzQM */
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+  scale: 5;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #571aa9;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
 }
 </style>

@@ -26,3 +26,6 @@ Route::post('/save-score', [ScoreController::class, 'saveScore']);
 
 use App\Http\Controllers\LeaderboardController;
 Route::get('/leaderboard', [LeaderboardController::class, 'index']);
+
+use App\Http\Controllers\RatingController;
+Route::post('/submit-rating', [RatingController::class, 'store']);

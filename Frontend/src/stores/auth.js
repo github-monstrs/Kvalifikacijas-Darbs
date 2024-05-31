@@ -60,10 +60,20 @@ export const useAuthStore = defineStore("auth", {
         async handleEmail(data) {
             try {
                 await this.getToken();
-                await axios.post('api/send-email', {
-                    name: data.name,
-                    email: data.email,
-                    message: data.message,
+                await axios.post('api/submit-rating', {
+                    stars: data.stars,
+                });
+
+            }
+            catch (error) {
+                console.error('There was an error sending the message', error);
+            }
+        },
+        async handleRating(data) {
+            try {
+                await this.getToken();
+                await axios.post('api/submit-rating', {
+                    stars: data.stars,
                 });
 
             }
