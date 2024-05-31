@@ -34,7 +34,7 @@ a:hover {
   display: flex;
   justify-content: center;
   height: 100%;
-  background-color: #303030;
+  background-color: #181818;
 }
 
 .game-card{

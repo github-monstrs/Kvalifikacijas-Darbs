@@ -81,7 +81,7 @@ function clearFormData() {
 }
 
 #background{
-  background-color: #303030;
+  background-color: #181818;
   height: 100%;
 }
 .form-fields {
