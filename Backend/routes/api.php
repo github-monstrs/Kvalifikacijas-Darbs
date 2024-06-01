@@ -15,8 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
 });
+
+use App\Http\Controllers\UserController;
+Route::get('/users', [UserController::class, 'index']);
+Route::delete('/users/{user}', [UserController::class, 'destroy']);
+Route::patch('/users/{user}/toggle-admin', [UserController::class, 'toggleAdmin']);
 
 use App\Http\Controllers\MailController;
 Route::post('/send-email', [MailController::class, 'send']);

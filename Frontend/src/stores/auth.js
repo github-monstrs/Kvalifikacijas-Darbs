@@ -4,6 +4,7 @@ import axios from "axios";
 export const useAuthStore = defineStore("auth", {
     state: () => ({
         authUser: null,
+        userList: null,
         csrfToken: null,
     }),
     getters: {
@@ -17,6 +18,11 @@ export const useAuthStore = defineStore("auth", {
             await this.getToken();
             const data = await axios.get('/api/user');
             this.authUser = data.data;
+        },
+        async getAllUsers() {
+            await this.getToken();
+            const users = await axios.get('/api/users');
+            this.userList = users.data;
         },
         async handleLogIn(data) {
             try {
@@ -79,6 +85,24 @@ export const useAuthStore = defineStore("auth", {
             }
             catch (error) {
                 console.error('There was an error sending the message', error);
+            }
+        },
+        async deleteUser(id) {
+            try {
+                await this.getToken();
+                await axios.delete(`/api/users/${id}`);
+                await this.getAllUsers();
+            } catch (error) {
+                console.error('Error deleting user:', error);
+            }
+        },
+        async toggleAdmin(id) {
+            try {
+                await this.getToken();
+                await axios.patch(`/api/users/${id}/toggle-admin`);
+                await this.getAllUsers();
+            } catch (error) {
+                console.error('Error toggling admin status:', error);
             }
         },
     }

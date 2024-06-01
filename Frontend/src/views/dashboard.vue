@@ -7,6 +7,7 @@ const authStore = useAuthStore();
 
 onMounted(async () => {
   await authStore.getUser();
+  await authStore.getAllUsers();
 });
 
 
@@ -15,60 +16,112 @@ onMounted(async () => {
 <!-- User profile dashboard design from: https://bbbootstrap.com/snippets/social-profile-container-63944396 -->
 
 <template>
-    <div v-if="authStore.user">
-        <div class="page-content page-container" id="page-content">
-            <div class="padding">
-                <div class="row container d-flex justify-content-center">
-                <div class="col-xl-6 col-md-12">
-                    <div class="card user-card-full">
-                    <div class="row m-l-0 m-r-0">
-                        <div class="col-sm-4 bg-c-lite-green user-profile">
-                        <div class="card-block text-center text-white">
-                            <div class="m-b-25">
-                            <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
-                            </div>
-                            <h6>{{ authStore.user.name }}</h6>
-                            <p>Web Designer</p>
-                            <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                        </div>
-                        </div>
-                        <div class="col-sm-8">
-                        <div class="card-block">
-                            <h6 class="m-b-20 p-b-5 b-b-default f-w-600 small-font">Information</h6>
-                            <div class="row">
-                            <div class="col-sm-6">
-                                <p class="m-b-10 f-w-600">Email</p>
-                                <p class="text-muted f-w-400">{{ authStore.user.email }}</p>
-                            </div>
-                            </div>
-                            <div class="row">
-                            </div>
-                            <ul class="social-link list-unstyled m-t-40 m-b-10">
-                            <li>
-                                <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true">
-                                <i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true">
-                                <i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true">
-                                <i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                        </div>
+  <div v-if="authStore.user">
+    <!-- loads if user is admin -->
+    <div v-if="authStore.user.is_admin" class="page-content page-container" id="page-content">
+      <div class="padding">
+        <div class="row container d-flex justify-content-center">
+          <div class="col-xl-6 col-md-12">
+            <div class="card user-card-full">
+              <div class="row m-l-0 m-r-0">
+                <div class="col-sm-4 bg-c-lite-green user-profile">
+                  <div class="card-block text-center text-white">
+                    <div class="m-b-25">
+                      <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                     </div>
+                    <h6>{{ authStore.user.name }}</h6>
+                    <p>Administrator</p>
+                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600 small-font">Information</h6>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Email</p>
+                        <p class="text-muted f-w-400">{{ authStore.user.email }}</p>
+                      </div>
                     </div>
+                  </div>
                 </div>
+                <!-- user list -->
+                <div class="card user-card-full">
+                  <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600 small-font">All Users</h6>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Is Admin</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="user in authStore.userList" :key="user.id">
+                          <td>{{ user.id }}</td>
+                          <td>{{ user.name }}</td>
+                          <td>{{ user.email }}</td>
+                          <td>{{ user.is_admin ? 'Yes' : 'No' }}</td>
+                          <td>
+                            <button @click="authStore.deleteUser(user.id)" v-if="authStore.user.is_admin">Delete</button>
+                            <button @click="authStore.toggleAdmin(user.id)" v-if="authStore.user.is_admin">
+                              {{ user.is_admin ? 'Remove Admin' : 'Make Admin' }}
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+                <!-- end of user list -->
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+    <!-- loads if user is regular user -->
+    <div v-else class="page-content page-container" id="page-content">
+      <div class="padding">
+        <div class="row container d-flex justify-content-center">
+          <div class="col-xl-6 col-md-12">
+            <div class="card user-card-full">
+              <div class="row m-l-0 m-r-0">
+                <div class="col-sm-4 bg-c-lite-green user-profile">
+                  <div class="card-block text-center text-white">
+                    <div class="m-b-25">
+                      <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                    </div>
+                    <h6>{{ authStore.user.name }}</h6>
+                    <p>User</p>
+                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600 small-font">Information</h6>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Email</p>
+                        <p class="text-muted f-w-400">{{ authStore.user.email }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- loads if user is not logged in -->
+  <div v-else>
+    <h1>TO VIEW THIS PAGE PLEASE LOG IN</h1>
+  </div>
 </template>
 
 
@@ -153,12 +206,6 @@ h6 {
 
 .card .card-block p {
     line-height: 25px;
-}
-
-@media only screen and (min-width: 1400px){
-p {
-    font-size: 14px;
-}
 }
 
 .card-block {

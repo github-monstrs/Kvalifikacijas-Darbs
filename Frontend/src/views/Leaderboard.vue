@@ -18,7 +18,6 @@ onMounted(() => {
   fetchLeaderboard();
 });
 
-// Computed property to filter the leaderboard based on search query
 const filteredLeaderboard = computed(() => {
   return leaderboard.value.filter(entry => {
     const playerMatch = entry.name.toLowerCase().includes(searchQuery.value.toLowerCase());
