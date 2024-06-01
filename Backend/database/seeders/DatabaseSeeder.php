@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@example.com',
         ]);
+
+        \App\Models\Game::factory()->create();
     }
 }
