@@ -46,7 +46,7 @@ onMounted(async () => {
                   </div>
                 </div>
                 <!-- user list -->
-                <div class="card user-card-full">
+                <div class="user-card-full">
                   <div class="card-block">
                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600 small-font">All Users</h6>
                     <table>
@@ -66,10 +66,12 @@ onMounted(async () => {
                           <td>{{ user.email }}</td>
                           <td>{{ user.is_admin ? 'Yes' : 'No' }}</td>
                           <td>
-                            <button @click="authStore.deleteUser(user.id)" v-if="authStore.user.is_admin">Delete</button>
-                            <button @click="authStore.toggleAdmin(user.id)" v-if="authStore.user.is_admin">
-                              {{ user.is_admin ? 'Remove Admin' : 'Make Admin' }}
-                            </button>
+                            <div id="admin-btn-wrapper">
+                              <button class="admin-btn" @click="authStore.deleteUser(user.id)" v-if="authStore.user.is_admin">Delete</button>
+                              <button class="admin-btn" @click="authStore.toggleAdmin(user.id)" v-if="authStore.user.is_admin">
+                                {{ user.is_admin ? 'Remove Admin' : 'Make Admin' }} 
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       </tbody>
@@ -198,7 +200,32 @@ body {
     border-radius: 5px;
 }
 
+table{
+  border-collapse: collapse;
+  width: 750px;
+}
 
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+#admin-btn-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-btn {
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+}
+
+.admin-btn:hover {
+  background-color: #7830c9;
+  border-radius: 5px;
+}
  
 h6 {
     font-size: 34px;

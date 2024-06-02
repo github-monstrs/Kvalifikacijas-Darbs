@@ -5,10 +5,6 @@ import { useAuthStore } from '@/stores/auth'; // Adjust the path to your store a
 
 const authStore = useAuthStore();
 
-onMounted(async () => {
-  await authStore.getUser();
-});
-
 const formData = ref({
   name: '',
   email: '',
@@ -69,8 +65,11 @@ function resetRating() {
         <button type="submit">Send message</button>
       </form>
     </div>
-    <div id="bottom" class="wrapper">
+    <div id="bottom">
       <!-- Star rating design from: https://codepen.io/neilpomerleau/pen/wzxzQM -->
+      <div id="rate-us">
+        <h1>Rate us:</h1>
+      </div>
       <form class="rating">
         <label>
           <input v-model="rating.stars" type="radio" name="stars" value="1" @change="submitRating()"/>
@@ -116,6 +115,19 @@ function resetRating() {
 
 #top{ 
   height: 160px;
+}
+
+#bottom {
+  height: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#rate-us {
+  color: white;
 }
 
 #form-wrapper{
@@ -190,7 +202,7 @@ button[type="submit"]:active {
   height: 50px;
   line-height: 50px;
   font-size: 50px;
-  scale: 5;
+  /*scale: 5; */
 }
 
 .rating label {
@@ -199,6 +211,7 @@ button[type="submit"]:active {
   left: 0;
   height: 100%;
   cursor: pointer;
+  font-size: 75px;
 }
 
 .rating label:last-child {
