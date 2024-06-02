@@ -168,9 +168,7 @@ function generateGame(){
     }
 }
 
-onMounted(async () => {
-    await authStore.getUser();
-    
+onMounted(() => {   
     loadGameRows();
     resetState();
     generateGame();

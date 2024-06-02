@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth';
 import axios from 'axios';
-
+import router from '@/router/index';
 
 const authStore = useAuthStore();
 
@@ -44,6 +44,10 @@ const saveScore = async (score, gameID, authStore, resetFunction) => {
   }
 };
 
+const redirectToLogin = () => {
+  router.push('/login')
+}
+
 </script>
 
 
@@ -57,7 +61,7 @@ const saveScore = async (score, gameID, authStore, resetFunction) => {
         <button @click="saveScore(score, gameID, authStore, resetFunction)">Save Score</button>
       </template>
       <template v-else>
-        <button @click="someOtherFunction()">Save Score</button>
+        <button @click="redirectToLogin">Save Score</button>
       </template>
     </div>
   </div>
