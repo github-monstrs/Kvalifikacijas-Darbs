@@ -178,10 +178,21 @@ onMounted(() => {
 <template>
     <div id="main-wrapper">
         <div id="game-wrapper"></div>
+
+        <div id="small-screen">
+            <h1>Please use landscape mode to play this game</h1>
+        </div>
     </div>
 </template>
 
 <style scoped>
+
+#small-screen {
+    width: 80%;
+    display: none;
+    font-size: larger;
+    text-align: center;
+}
 
 #game-wrapper{
     position: relative;
@@ -189,6 +200,7 @@ onMounted(() => {
     border-radius: 10px;
     top: 50px;
     height: 450px;
+    margin-bottom: 150px;
 }
 
 #main-wrapper{
@@ -196,5 +208,22 @@ onMounted(() => {
     justify-content: center;
     height: 100%;
     background-color: #303030;
+}
+
+@media (max-width: 750px) {
+    #game-wrapper{
+        top: -40px;
+        scale: 0.7; 
+    }
+}
+
+@media (max-width: 550px) and (orientation: portrait) {
+    #game-wrapper {
+        display: none;
+    }
+    
+    #small-screen {
+        display: block;
+    }
 }
 </style>

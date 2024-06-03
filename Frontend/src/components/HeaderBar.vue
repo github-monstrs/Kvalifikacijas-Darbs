@@ -24,28 +24,50 @@ window.onclick = function(event) {
 </script>
 
 <template>
-  <nav>
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/projects">Projects</router-link></li>
-      <li><router-link to="/leaderboard">Leaderboard</router-link></li>
-      <li><router-link to="/contacts">Contacts</router-link></li>
-      <template v-if="!authStore.user">
-        <li><router-link to="/login">Login</router-link></li>
-      </template>
-      <template v-else>
-        <li><img id="logIn" class="dropbtn" src="../assets/picture-placeholder.png" alt="profile picture placeholder image" @click="showDropdown()" width="40" height="40" ></li>
-        <div id="Dropdown" class="dropdown-content">
-          <router-link to="/dashboard">Profile</router-link>
-          <a @click="authStore.handleLogout()">Logout</a>
-        </div>
-      </template>
+  <header>
+    <a id="logo" href="/"><img alt="logo" class="logo" src="../assets/logo.png" width="40" height="40" /></a>
+    <nav>
+      <ul>
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/projects">Projects</router-link></li>
+        <li><router-link to="/leaderboard">Leaderboard</router-link></li>
+        <li><router-link to="/contacts">Contacts</router-link></li>
+        <template v-if="!authStore.user">
+          <li><router-link to="/login">Login</router-link></li>
+        </template>
+        <template v-else>
+          <li><img id="logIn" class="dropbtn" src="../assets/picture-placeholder.png" alt="profile picture placeholder image" @click="showDropdown()" width="40" height="40" ></li>
+          <div id="Dropdown" class="dropdown-content">
+            <router-link to="/dashboard">Profile</router-link>
+            <a @click="authStore.handleLogout()">Logout</a>
+          </div>
+        </template>
 
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  </header>
 </template>
 
 <style scoped>
+
+header {
+  left: 0px;
+  top: 0px;
+  line-height: 1.5;
+  width: 100vw;
+  height: 65px;
+  background-color: #303030;
+  overflow: hidden !important;
+}
+
+header img {
+  left: 0px;
+}
+
+header {
+  display: flex;
+  place-items: center;
+}
 
 .dropbtn {
   background-color: transparent;
@@ -121,6 +143,45 @@ li {
   float: left;
   display: flex;
   align-items: center;
+}
+
+#logo:hover{
+  background-color: transparent;
+  padding: 0px;
+  border-radius: 0px;
+}
+
+.logo {
+  display: block;
+  margin: 0 15px;
+}
+
+@media (max-width: 450px) {
+  header {
+    height: 110px;
+    flex-direction: column;
+  }
+
+  #logo{
+    margin-top: 15px;
+  }
+
+  nav {
+    position: relative;
+  }
+
+  ul{
+    justify-content: center;
+  }
+
+  li{
+    margin: 5px;
+  }
+
+  .dropdown-content{
+    position: fixed;
+    top: 110px
+  }
 }
 
 </style>

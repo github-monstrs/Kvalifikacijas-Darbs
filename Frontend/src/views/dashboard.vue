@@ -302,6 +302,84 @@ h6 {
     transition: all 0.3s ease-in-out;
 }
 
+table {
+  width: 50%;
+  background-color: #303030;
+  border-collapse: collapse !important;
+  border:solid black 1px;
+}
 
+thead, th{
+  background-color: #571aa9;
+  color: black;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+@media (max-width: 1300px) {
+  table{
+    width: 70%;
+  }
+
+}
+
+@media (max-width: 1030px) {
+  table{
+    width: 100%;
+  }
+}
+
+@media (max-width: 705px) {
+  .padding {
+    padding: 1rem !important;
+  }
+}
+
+@media (max-width: 650px) {
+  #admin-btn-wrapper {
+    flex-direction: column;
+  }
+
+  .admin-btn{
+    height: 40px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 530px) {
+  table{
+    transform-origin: top left;
+    scale: 0.85;
+  }
+}
+
+@media (max-width: 450px) {
+  table{
+    transform-origin: top left;
+    scale: 0.75;
+  }
+}
+
+@media (max-width: 415px) {
+  table{
+    transform-origin: top left;
+    scale: 0.65;
+  }
+}
+
+@media (max-width: 350px) {
+  table{
+    transform-origin: top left;
+    scale: 0.58;
+  }
+}
 
 </style>

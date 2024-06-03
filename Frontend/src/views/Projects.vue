@@ -54,4 +54,17 @@ a:hover {
   flex-direction: column;
   justify-content: center;
 }
+
+@media (max-width: 590px){
+  .game-card {
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 500px;
+  }
+
+  img {
+    margin: 15px;
+  }
+}
 </style>

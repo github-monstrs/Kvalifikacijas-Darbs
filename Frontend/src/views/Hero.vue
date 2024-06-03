@@ -81,14 +81,28 @@ onMounted(async () => {
   #hero-text{
     width: 100%;
     background-color: rgba(48, 48, 48, 1);
-    height: 50vh;
-    top: 30%;
+    height: 60vh;
+    top: 20%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
     border-radius: 0;
+  }
+}
+
+@media (max-height: 710px) {
+  #hero-text{
+    position: unset;
+    margin: 0px;
+  }
+
+  #hero-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 250px;
   }
 }
 </style>

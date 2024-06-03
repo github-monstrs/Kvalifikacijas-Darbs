@@ -202,7 +202,6 @@ button[type="submit"]:active {
   height: 50px;
   line-height: 50px;
   font-size: 50px;
-  /*scale: 5; */
 }
 
 .rating label {
@@ -262,4 +261,23 @@ button[type="submit"]:active {
 .rating label input:focus:not(:checked) ~ .icon:last-child {
   color: #000;
 }
+
+@media (max-width: 450px) {
+  .wrapper {
+    scale: 0.8;
+  }
+
+  #top {
+    height: 100px;
+  }
+
+  #form-wrapper {
+    margin-bottom: 15px;
+  }
+
+  .rating label {
+    font-size: 60px;
+  }
+}
+
 </style>

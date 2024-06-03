@@ -62,6 +62,7 @@ const filteredLeaderboard = computed(() => {
   align-items: center;
   justify-content: center;
   margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 #header{
@@ -116,6 +117,12 @@ th, td {
 
   #header {
     width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+  #searchbar, h1 {
+    scale: 0.9;
   }
 }
 

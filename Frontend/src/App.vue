@@ -4,11 +4,8 @@ import HeaderBar from '@/components/HeaderBar.vue'
 </script>
 
 <template>
-  <header>
-    <a id="logo" href="/"><img alt="Vue logo" class="logo" src="./assets/logo.png" width="40" height="40" /></a>
-    <HeaderBar />
-  </header>
-
+  <HeaderBar />
+  
   <main id="mainEl">
     <RouterView />
   </main>
@@ -16,47 +13,12 @@ import HeaderBar from '@/components/HeaderBar.vue'
 
 <style scoped>
 
-header {
-  left: 0px;
-  top: 0px;
-  line-height: 1.5;
-  width: 100vw;
-  height: 65px;
-  background-color: #303030;
-  overflow: hidden !important;
-  z-index: 9999;
-}
-
 main{
   position: relative;
   width: 100%;
   height: 100%;
   left: 0px;
 }
-
-header img {
-  left: 0px;
-}
-
-#logo:hover{
-  background-color: transparent;
-  padding: 0px;
-  border-radius: 0px;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-header {
-  display: flex;
-  place-items: center;
-}
-
-.logo {
-    margin: 0 15px;
-  }
 
 @media (min-width: 1024px) {
   
