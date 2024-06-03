@@ -1,9 +1,16 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-
+import router from '@/router/index';
 
 const authStore = useAuthStore();
+
+onMounted(async () => {
+  await authStore.getUser();
+  if (authStore.user) {
+    router.push('/dashboard');
+  }
+});
 
 const formData = ref({
   email: '',

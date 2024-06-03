@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth';
 import axios from 'axios';
-
+import router from '@/router/index';
 
 const authStore = useAuthStore();
 
