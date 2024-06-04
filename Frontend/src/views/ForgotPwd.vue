@@ -1,53 +1,36 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, getCurrentInstance, onMounted, createApp } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-
+import router from '@/router/index';
 
 const authStore = useAuthStore();
 
+onMounted(async () => {
+});
+
 const formData = ref({
-  username: '',
   email: '',
-  password: '',
-  password_confirm: ''
 });
 
 </script>
 
 <template>
-  <div id="background-wrapper">
+  <div id="background-wrapper" >
     <div id="login-bg">
       <div id="top">
-        <h4 id="sign-in">Register</h4>
+        <h4 id="sign-in">Forgot password</h4>
       </div>
       <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8" @submit.prevent="authStore.handleRegister(formData)">
-          <div class="form-fields">
-            <label for="username">Username</label>
-            <input v-model="formData.username" type="text" id="username" name="username" required>
-          </div>
+        <form accept-charset="UTF-8" @submit.prevent="">
 
           <div class="form-fields">
             <label for="email">Email</label>
             <input v-model="formData.email" type="email" id="email" name="email" required>
           </div>
 
-          <div class="form-fields">
-            <label for="password">Password</label>
-            <input v-model="formData.password" type="password" id="password" name="password" required>
-          </div>
-
-          <div class="form-fields">
-            <label for="confirm-password">Confirm Password</label>
-            <input v-model="formData.password_confirm" type="password" id="confirm-password" name="confirm-password" required>
-          </div>
-
-          <button type="submit" @click="authStore.handleRegister(formData)">Register</button>
+          <button type="submit" @click="authStore.handleForgotPassword(formData);">Submit</button>
         </form>
       </div>
-      <div id="bottom">
-          <router-link to="/login" id="register">Already a member? Sign In.</router-link>
-        </div>
     </div>
   </div>
 </template>
@@ -68,50 +51,44 @@ a:hover{
   background-color: transparent;
 }
 
-#bottom{
-  display: flex;
-  width: inherit;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 #background-wrapper{
   width: 100vw;
   height: 100vh;
   background-color: rgba(35, 35, 35, 0.9);
   overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 #login-bg{
   display: flex;
   width: 450px;
-  height: 550px;
+  height: 225px;
   background-color: white;
   border-radius: 10px;
   flex-direction: column;
   align-items: center;
+  margin-top: 5%;
 }
 
 #top{
   display: flex;
   width: inherit;
-  height: 30%;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  margin-top: 3%;
+  padding-left: 60px;
 }
 
 #bottom{
   display: flex;
-  width: 325px;
+  width: inherit;
   flex-direction: row;
   justify-content: space-between;
 }
 
 #sign-in{
-  font-size: 56px;
+  font-size: 30px;
   font-weight: bold;
   color: #303030;
 }
@@ -119,8 +96,8 @@ a:hover{
 #form-wrapper{
   display: flex;
   flex-direction: column;
+  height: 50%;
   justify-content: space-around;
-  margin-bottom: 20px;
 }
 
 .form-fields {
@@ -135,7 +112,7 @@ label {
   color: #303030;
 }
 
-input[type="password"], input[type="email"], input[type="text"] {
+input[type="password"], input[type="email"] {
   border: 1px solid #ccc;
   font-size: 1rem;
   padding: 6px 10px;
@@ -184,4 +161,5 @@ button[type="submit"]:hover{
     scale: 0.7;
   }
 }
+
 </style>

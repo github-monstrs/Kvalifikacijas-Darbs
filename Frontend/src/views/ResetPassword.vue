@@ -1,15 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useRoute } from 'vue-router';
 
-
+const route = useRoute();
 const authStore = useAuthStore();
 
 const formData = ref({
-  username: '',
-  email: '',
   password: '',
-  password_confirm: ''
+  password_confirmation: '',
+  email: route.query.email,
+  token: route.params.token,
 });
 
 </script>
@@ -18,20 +19,10 @@ const formData = ref({
   <div id="background-wrapper">
     <div id="login-bg">
       <div id="top">
-        <h4 id="sign-in">Register</h4>
+        <h4 id="sign-in">Reset Password</h4>
       </div>
       <div id="form-wrapper" class="wrapper">
-        <form accept-charset="UTF-8" @submit.prevent="authStore.handleRegister(formData)">
-          <div class="form-fields">
-            <label for="username">Username</label>
-            <input v-model="formData.username" type="text" id="username" name="username" required>
-          </div>
-
-          <div class="form-fields">
-            <label for="email">Email</label>
-            <input v-model="formData.email" type="email" id="email" name="email" required>
-          </div>
-
+        <form accept-charset="UTF-8" @submit.prevent="">
           <div class="form-fields">
             <label for="password">Password</label>
             <input v-model="formData.password" type="password" id="password" name="password" required>
@@ -39,15 +30,12 @@ const formData = ref({
 
           <div class="form-fields">
             <label for="confirm-password">Confirm Password</label>
-            <input v-model="formData.password_confirm" type="password" id="confirm-password" name="confirm-password" required>
+            <input v-model="formData.password_confirmation" type="password" id="confirm-password" name="confirm-password" required>
           </div>
 
-          <button type="submit" @click="authStore.handleRegister(formData)">Register</button>
+          <button type="submit" @click="authStore.handleResetPassword(formData)">Reset password</button>
         </form>
       </div>
-      <div id="bottom">
-          <router-link to="/login" id="register">Already a member? Sign In.</router-link>
-        </div>
     </div>
   </div>
 </template>
@@ -81,26 +69,28 @@ a:hover{
   background-color: rgba(35, 35, 35, 0.9);
   overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 #login-bg{
   display: flex;
   width: 450px;
-  height: 550px;
+  height: 300px;
   background-color: white;
   border-radius: 10px;
   flex-direction: column;
   align-items: center;
+  margin-top: 3%;
 }
 
 #top{
   display: flex;
   width: inherit;
-  height: 30%;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  margin-top: 3%;
+  padding-left: 60px;
+  margin-bottom: 25px;
 }
 
 #bottom{
@@ -111,7 +101,7 @@ a:hover{
 }
 
 #sign-in{
-  font-size: 56px;
+  font-size: 30px;
   font-weight: bold;
   color: #303030;
 }

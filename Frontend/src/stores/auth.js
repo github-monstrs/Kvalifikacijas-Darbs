@@ -36,8 +36,6 @@ export const useAuthStore = defineStore("auth", {
                 this.router.push('/');
 
             } catch (error) {
-                window.location = '/';
-                this.router.push('/');
                 console.log(error);
             }
         },
@@ -54,8 +52,6 @@ export const useAuthStore = defineStore("auth", {
                 this.router.push('/');
 
             } catch (error) {
-                window.location = '/';
-                this.router.push('/');
                 console.log(error);
             }
         },
@@ -63,9 +59,29 @@ export const useAuthStore = defineStore("auth", {
             await axios.post('/logout');
             this.authUser = null;
         },
+        async handleForgotPassword(data) {
+            try {
+                await axios.post('/forgot-password', {
+                    email: data.email,
+                });
+            }
+            catch(error){
+                console.log(error);
+            }
+        },
+        async handleResetPassword(data) {
+            try {
+                await axios.post('/reset-password', data);
+                console.log('Password reset complete')
+                this.router.push('/');
+            }
+            catch(error){
+                console.log(error);
+            }
+
+        },
         async handleEmail(data) {
             try {
-                //await this.getToken();
                 await axios.post('api/send-email', {
                     name: data.name,
                     email: data.email,

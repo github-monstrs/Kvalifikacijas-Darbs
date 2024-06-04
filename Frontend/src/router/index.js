@@ -7,6 +7,8 @@ import Dashboard from "@/views/dashboard.vue";
 import Login from "@/views/LogIn.vue";
 import Register from "@/views/Register.vue";
 import Leaderboard from "@/views/Leaderboard.vue";
+import ForgotPwd from "@/views/ForgotPwd.vue";
+import ResetPassword from "@/views/ResetPassword.vue";
 
 const routes = [
   {
@@ -49,6 +51,16 @@ const routes = [
     path: "/leaderboard",
     name: "leaderboard",
     component: Leaderboard,
+  },
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component: ForgotPwd,
+  },
+  {
+    path: "/password-reset/:token",
+    name: "password-reset",
+    component: ResetPassword,
   }
 ];
 

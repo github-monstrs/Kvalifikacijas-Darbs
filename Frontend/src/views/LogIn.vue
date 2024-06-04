@@ -42,7 +42,7 @@ const formData = ref({
         </form>
         <div id="bottom">
           <router-link to="/register" id="register" >Register</router-link>
-          <a id="forgot-pwd">Forgot password?</a>
+          <router-link to="/forgot-password" id="forgot-pwd">Forgot password?</router-link>
         </div>
       </div>
     </div>
@@ -154,4 +154,25 @@ button[type="submit"]:hover{
 .form-fields input{
   width: 325px;
 }
+
+@media (max-width: 500px) {
+  #login-bg{
+    scale: 0.9;
+  }
+}
+
+@media (max-width: 450px) {
+  #login-bg{
+    transform-origin: top;
+    scale: 0.8;
+  }
+}
+
+@media (max-width: 400px) {
+  #login-bg{
+    transform-origin: top;
+    scale: 0.7;
+  }
+}
+
 </style>
