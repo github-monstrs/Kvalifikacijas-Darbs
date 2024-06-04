@@ -7,9 +7,18 @@ const authStore = useAuthStore();
 
 onMounted(async () => {
   await authStore.getUser();
-  await authStore.getAllUsers();
+  if (authStore.authUser.is_admin) {
+    await authStore.getAllUsers();
+  }
 });
 
+async function deleteCurrentUser() {
+  await authStore.getUser();
+  var current_userID = authStore.authUser.id;
+
+  await authStore.handleLogout();
+  await authStore.deleteCurrentUser(current_userID);
+}
 
 </script>
 
@@ -113,6 +122,7 @@ onMounted(async () => {
                     </div>
                   </div>
                 </div>
+                <button id="delete-btn" @click="deleteCurrentUser()">Delete User</button>
               </div>
             </div>
           </div>
@@ -300,6 +310,25 @@ h6 {
     margin: 0 10px 0 0;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
+
+#delete-btn {
+  color: black;
+  font-weight: bold !important;
+  background-color: red;
+  border: none;
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+#delete-btn:hover {
+  background-color: transparent;
+  border: solid 3px;
+  border-color: red;
+  color: #fff;
+  padding: 7px 32px;
+  cursor: pointer;
 }
 
 table {

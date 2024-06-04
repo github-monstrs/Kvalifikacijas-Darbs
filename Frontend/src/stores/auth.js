@@ -108,6 +108,16 @@ export const useAuthStore = defineStore("auth", {
                 console.error('There was an error sending the message', error);
             }
         },
+        async deleteCurrentUser(id) {
+            try {
+                await this.getToken();
+                await axios.delete(`api/users/${id}`);
+                console.log('user deleted successfully');
+            }
+            catch (error) {
+                console.error('Error deleting user:', error);
+            }
+        },
         async deleteUser(id) {
             try {
                 await this.getToken();
