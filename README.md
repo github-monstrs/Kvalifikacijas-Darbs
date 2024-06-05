@@ -1,29 +1,77 @@
-# Kvalifikacijas Darbs
+# Projekta apraksts
 
-4.kursa kvalifikācijas darbs RVT.
+RVT 3.kursa WEB programmēšanas moduļa gala projekts. Kvalifikācijas darba iesākums.
 
-## Project overview
+## Projekta izstrādes rīki
 
-Project overview in stages [here](https://github.com/github-monstrs/Kvalifikacijas-Darbs/tree/main/Frontend/project-overview/20.03.2024)
+Lai izveidotu šo projektu tika izmantots:
+- **vue.js** - frontend
+- **Pinia + Axios** - komunikācijai ar backend
+- **Laravel** - backend
+- **Laravel sail + Docker** - Projekta palaišana
+- **PostgreSQL** - datubāze
 
-## Recommended IDE Setup
+Un projektu izstrādāju izmantojot Visual Studio Code.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Projekta uzstādīšana/palaišana
 
-## Project Setup
+Lai palaistu projektu jābūt ieinstalētam:
+- php + composer
+- node.js
+- docker
 
+Noklonēt projektu
+```sh
+git clone https://github.com/github-monstrs/Kvalifikacijas-Darbs.git
+```
+
+### Frontend:
+
+Ieiet frontend folderī
+```sh
+cd Kvalifikacijas-Darbs/Frontend
+```
+
+Ieinstalēt nepieciešamās frontend pakotnes
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Backend:
 
+Ieiet backend folderī
 ```sh
-npm run dev
+cd ../Backend
 ```
 
-### Compile and Minify for Production
-
+Ieinstalēt nepieciešamās backend pakotnes
 ```sh
-npm run build
+composer install
+```
+
+Jāuztaisa .env fails no piemēra
+```sh
+cp .env.example .env
+```
+
+Jāaizpilda .env fails ar vēlamajiem portiem, API atslēgām, utml.
+```sh
+nano .env
+```
+*ja pieejams var izmantot texta editoru*
+‎  
+‎
+
+Uzģenerēt aplikācijas atslēgu
+```sh
+php artisan key:generate
+```
+
+Palaist projektu
+```sh
+./vendor/bin/sail up
+```
+*vai*
+```sh
+./vendor/bin/sail up -d
 ```
