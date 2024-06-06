@@ -1,5 +1,5 @@
 services:
-    laravel.test:
+    backend:
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
             dockerfile: Dockerfile
@@ -50,7 +50,7 @@ services:
             timeout: 5s
     vue:
         build:
-            context: ../Frontend
+            context: ../nodejs-example
             dockerfile: Dockerfile
         ports:
             - '3000:3000'
