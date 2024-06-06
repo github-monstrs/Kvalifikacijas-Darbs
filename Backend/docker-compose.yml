@@ -50,12 +50,12 @@ services:
             timeout: 5s
     vue:
         build:
-            context: ../nodejs-example
+            context: ../Frontend
             dockerfile: Dockerfile
         ports:
             - '3000:3000'
         volumes:
-            - '../nodejs-example:/app'
+            - '../Frontend:/app'
         networks:
             - sail
 
