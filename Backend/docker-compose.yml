@@ -56,7 +56,6 @@ services:
             - '3000:3000'
         volumes:
             - '../nodejs-example:/app'
-            - '../nodejs-example:/app/node_modules'
         networks:
             - sail
 
