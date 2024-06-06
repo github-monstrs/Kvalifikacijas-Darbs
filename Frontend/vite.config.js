@@ -9,15 +9,7 @@ export default defineConfig({
     vue(),
   ],
   server: {
-    port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://laravel.test',
-        changeOrigin: true,
-        secure: false,
-        ws: true
-      }
-    }
+    port: 3000
   },
   resolve: {
     alias: {
