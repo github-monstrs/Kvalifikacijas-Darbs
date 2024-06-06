@@ -55,7 +55,7 @@ services:
         ports:
             - '3000:3000'
         volumes:
-            - '../Frontend:/app'
+            - '../nodejs-example:/app'
         networks:
             - sail
 
