@@ -75,3 +75,8 @@ Palaist projektu
 ```sh
 ./vendor/bin/sail up -d
 ```
+
+Pēc tam kad konteineris palaists veikt datubāzes migrēšanu un sākotnējo datu ievadi
+```sh
+./vendor/bin/sail artisan migrate --seed
+```
